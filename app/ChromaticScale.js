@@ -35,7 +35,7 @@ export default class ChromaticScale extends Component {
     // this.setState({this.props})
     const note = this.props.tones[`${scaleDegrees[evt.key]}`]
     console.log('NOTE', note)
-    synth.triggerAttackRelease(note.noteName, '4n')
+    // synth.triggerAttackRelease(note.noteName, '4n')
     this.props.toggleTone(`${scaleDegrees[evt.key]}`)
   }
 

@@ -3,6 +3,7 @@ import ChromaticScale from './ChromaticScale'
 import Tone from 'tone'
 
 const synth = new Tone.PolySynth(12, Tone.Synth).toMaster()
+Tone.Transport.bpm.value = 160;
 Tone.Transport.start()
     
 export default class Container extends Component {
@@ -27,7 +28,7 @@ export default class Container extends Component {
   }
 
   go (note) {
-    synth.triggerAttackRelease(note)
+    synth.triggerAttackRelease(note, '8n')
   }
   
   play () {
@@ -37,12 +38,11 @@ export default class Container extends Component {
         notes.push(this.state[key].noteName)
       }
     }
-    console.log(notes)
-    const seq = new Tone.Sequence(function(time, note) {
-      synth.triggerAttackRelease(note, time)
-    }, notes, '32n')
-    seq.loop = 1
-    seq.start()
+   const pattern = new Tone.Pattern(function(time, note) {
+     synth.triggerAttackRelease(note, '4n');
+   }, notes, 'upDown');
+   pattern.iterations = (notes.length * 2) - 1;
+   pattern.start();
   }
 
   ascending () {

@@ -12,11 +12,25 @@ body {
 #app {
   width: 100%;
   height: 100%;
+  display: flex;
   justify-content: center;
 }
 
 .container {
-  display: inline;
-  justify-content: center;
-  align-content: ;
+  width: 100%;
+  height: 100%;
+}
+
+#inner-container {
+  position: fixed;
+  width: 100%;
+  bottom: 50%;
+  align-content: center;
+}
+
+.scale-container {
+  display: inline-flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
 }
