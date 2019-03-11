@@ -34,3 +34,7 @@ body {
   flex-direction: row;
   justify-content: space-around;
 }
+
+#bpm-select {
+  display: inline-flex;
+}
