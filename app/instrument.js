@@ -30,7 +30,10 @@ const scale = {
   12: false
 }
 
-const synth = new Tone.PolySynth(12, Tone.Synth).toMaster()
+const env = new Tone.AmplitudeEnvelope({
+  attack: 1.5
+})
+const synth = new Tone.PolySynth(12, Tone.Synth).connect(env).toMaster();
 
 const toneTrigger = (key) => {
   return tones[key]
