@@ -3,7 +3,11 @@ import Select from '@material-ui/core/Select'
 import ChromaticScale from './ChromaticScale'
 import Tone from 'tone'
 
-const synth = new Tone.PolySynth(12, Tone.Synth).toMaster()
+const env = new Tone.AmplitudeEnvelope({
+  'attack': 1.5
+}).toMaster();
+const synth = new Tone.PolySynth(12, Tone.Synth).connect(env);
+
 Tone.Transport.bpm.value = 160;
 Tone.Transport.start()
 
@@ -87,7 +91,7 @@ arpeggio () {
   }
   console.log('ARPEGGIO', this.state)
   const patternObj = new Tone.Pattern(function(time, note) {
-    synth.triggerAttackRelease(note, '4n');
+    env.triggerAttackRelease(note, '4t');
   }, notes, 'upDown')
   patternObj.iterations = (notes.length * 2) - 1
   patternObj.start();
@@ -151,8 +155,11 @@ play () {
             <option value="descending">Descending</option>
             <option value="arpeggio">Arpeggio</option>
         </Select>
-        <h3>Keys:</h3>
-        <h2>space = chord, a = arpeggio up and down, d = arpeggio down, u = arpeggio up</h2>
+        <h3>Keyboard Button: Pattern</h3>
+        <h2>space: chord</h2>
+        <h2>'a': arpeggio up and down</h2>
+        <h2>'d': arpeggio down</h2>
+        <h2>'u': arpeggio up</h2>
       </div>
     )
   }
